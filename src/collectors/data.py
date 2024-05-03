@@ -35,12 +35,14 @@ class DataCollector(metaclass=SingletonMeta):
 
             with open(os.path.join(key_dir, f"{phase}.pkl"), "wb+") as f:
                 pickle.dump(module.state_dict(), f)
-                
+
         if phase == 'init':
             self.init_states[module.depth] = deepcopy(module.state_dict())
+            return
             
         if module.depth not in self.previous_states:
             self.previous_states[module.depth] = deepcopy(module.state_dict())
+            return
             
         init = self.init_states[module.depth]
         prev = self.previous_states[module.depth]
