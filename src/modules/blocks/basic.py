@@ -6,7 +6,7 @@ import torch.nn as nn
 from torch import Tensor
 
 from ..layers import conv3x3
-from ..utils import collect_init_module_state, collect_post_backward_module_state
+from ..hooks import collect_init_module_state_once, collect_post_backward_module_state
 
 class BasicBlock(nn.Module):
     expansion: int = 1
@@ -42,8 +42,8 @@ class BasicBlock(nn.Module):
         self.depth = kwargs.get("depth", None)
         if self.depth is None:
             raise ValueError("Basic block should")
-
-        collect_init_module_state(self)
+        
+        self.init_state_handle = self.register_forward_pre_hook(collect_init_module_state_once)
         self.register_full_backward_hook(collect_post_backward_module_state)
 
     def forward(self, x: Tensor) -> Tensor:
