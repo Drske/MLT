@@ -6,7 +6,7 @@ import torch
 import torch.nn as nn
 from torch import Tensor
 
-from ..utils import conv1x1
+from ..layers import conv1x1
 from ..blocks import BasicBlock, Bottleneck
 
 class ResNet(nn.Module):
@@ -29,6 +29,7 @@ class ResNet(nn.Module):
 
         self.inplanes = 64
         self.dilation = 1
+        self.max_depth = 0
         if replace_stride_with_dilation is None:
             # each element in the tuple indicates if we should replace
             # the 2x2 stride with a dilated convolution instead
@@ -89,13 +90,15 @@ class ResNet(nn.Module):
             )
 
         layers = []
+        self.max_depth += 1
         layers.append(
             block(
-                self.inplanes, planes, stride, downsample, self.groups, self.base_width, previous_dilation, norm_layer
+                self.inplanes, planes, stride, downsample, self.groups, self.base_width, previous_dilation, norm_layer, depth = self.max_depth
             )
         )
         self.inplanes = planes * block.expansion
         for _ in range(1, blocks):
+            self.max_depth += 1
             layers.append(
                 block(
                     self.inplanes,
@@ -104,6 +107,7 @@ class ResNet(nn.Module):
                     base_width=self.base_width,
                     dilation=self.dilation,
                     norm_layer=norm_layer,
+                    depth = self.max_depth
                 )
             )
 

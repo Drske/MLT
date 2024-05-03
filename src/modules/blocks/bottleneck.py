@@ -5,7 +5,7 @@ from typing import Optional, Callable
 import torch.nn as nn
 from torch import Tensor
 
-from ..utils import conv3x3, conv1x1
+from ..layers import conv3x3, conv1x1
 
 
 class Bottleneck(nn.Module):

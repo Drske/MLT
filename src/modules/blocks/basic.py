@@ -5,8 +5,8 @@ from typing import Optional, Callable
 import torch.nn as nn
 from torch import Tensor
 
-from ..utils import conv3x3
-
+from ..layers import conv3x3
+from ..utils import collect_init_module_state, collect_post_backward_module_state
 
 class BasicBlock(nn.Module):
     expansion: int = 1
@@ -21,6 +21,7 @@ class BasicBlock(nn.Module):
         base_width: int = 64,
         dilation: int = 1,
         norm_layer: Optional[Callable[..., nn.Module]] = None,
+        **kwargs,
     ) -> None:
         super().__init__()
         if norm_layer is None:
@@ -37,6 +38,13 @@ class BasicBlock(nn.Module):
         self.bn2 = norm_layer(planes)
         self.downsample = downsample
         self.stride = stride
+
+        self.depth = kwargs.get("depth", None)
+        if self.depth is None:
+            raise ValueError("Basic block should")
+
+        collect_init_module_state(self)
+        self.register_full_backward_hook(collect_post_backward_module_state)
 
     def forward(self, x: Tensor) -> Tensor:
         identity = x
