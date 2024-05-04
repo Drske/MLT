@@ -165,3 +165,7 @@ cython_debug/
 # data directory
 data/*
 !data/.gitignore
+
+# experiments directory
+experiments/*
+!experiments/.gitignore

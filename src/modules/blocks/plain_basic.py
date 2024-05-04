@@ -8,7 +8,7 @@ from torch import Tensor
 from ..layers import conv3x3
 from ..hooks import collect_init_module_state_once, collect_post_backward_module_state
 
-class PlainBlock(nn.Module):
+class PlainBasicBlock(nn.Module):
     expansion: int = 1
 
     def __init__(
@@ -27,9 +27,9 @@ class PlainBlock(nn.Module):
         if norm_layer is None:
             norm_layer = nn.BatchNorm2d
         if groups != 1 or base_width != 64:
-            raise ValueError("PlainBlock only supports groups=1 and base_width=64")
+            raise ValueError("PlainBasicBlock only supports groups=1 and base_width=64")
         if dilation > 1:
-            raise NotImplementedError("Dilation > 1 not supported in PlainBlock")
+            raise NotImplementedError("Dilation > 1 not supported in PlainBasicBlock")
         # Both self.conv1 and self.downsample layers downsample the input when stride != 1
         self.conv1 = conv3x3(inplanes, planes, stride)
         self.bn1 = norm_layer(planes)

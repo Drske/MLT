@@ -1,3 +1,4 @@
 from .basic import BasicBlock
 from .bottleneck import Bottleneck
-from .plain import PlainBlock
+from .plain_basic import PlainBasicBlock
+from .plain_bottleneck import PlainBottleneck
