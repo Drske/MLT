@@ -25,17 +25,6 @@ class DataCollector(metaclass=SingletonMeta):
         if phase not in ["init", "post-backward"]:
             raise ValueError("Invalid phase. Proper values are init or post-backward.")
 
-        if self.work_dir is not None:
-            module_name = module.__class__.__name__
-            key = (self.current_epoch, module_name, module.depth, self.current_batch)
-            key_dir = os.path.join(self.work_dir, *map(str, key))
-
-            if not os.path.exists(key_dir):
-                os.makedirs(key_dir)
-
-            with open(os.path.join(key_dir, f"{phase}.pkl"), "wb+") as f:
-                pickle.dump(module.state_dict(), f)
-
         if phase == 'init':
             self.init_states[module.depth] = deepcopy(module.state_dict())
             return
@@ -58,3 +47,20 @@ class DataCollector(metaclass=SingletonMeta):
         
         self.init_differences[module.depth].append(parameters_distance(init, curr, **self.metric_kwargs))
         self.next_differences[module.depth].append(parameters_distance(prev, curr, **self.metric_kwargs))
+        
+    def save_state(self, directory: str):
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+            
+        with open(os.path.join(directory, "init_states.pkl"), "wb+") as f:
+            pickle.dump(self.init_states, f)
+            
+        with open(os.path.join(directory, "previous_states.pkl"), "wb+") as f:
+            pickle.dump(self.previous_states, f)
+            
+        with open(os.path.join(directory, "init_differences.pkl"), "wb+") as f:
+            pickle.dump(self.init_differences, f)
+            
+        with open(os.path.join(directory, "next_differences.pkl"), "wb+") as f:
+            pickle.dump(self.next_differences, f)
+            

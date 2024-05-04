@@ -14,7 +14,7 @@ def mnist():
         root="data", train=False, transform=transform, download=True
     )
 
-    train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=256, shuffle=True)
-    valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=256, shuffle=False)
+    train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=1024, shuffle=True)
+    valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=1024, shuffle=False)
     
     return train_loader, valid_loader
