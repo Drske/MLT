@@ -12,7 +12,8 @@ def parameters_distance(pre: dict, post: dict, metric: str = "euclidean", p: flo
             pre_params.cpu().numpy().flatten(),
             post_params.cpu().numpy().flatten(),
         )
-
+        if 'bn' in name:
+            continue
         if "running_mean" in name:
             continue
         if "running_var" in name:
@@ -26,7 +27,10 @@ def parameters_distance(pre: dict, post: dict, metric: str = "euclidean", p: flo
             case "cosine":
                 dot_product = np.dot(pre_params, post_params)
                 norm_product = np.linalg.norm(pre_params) * np.linalg.norm(post_params)
-                distance += dot_product / norm_product
+                if norm_product == 0:
+                    distance = 0
+                else:
+                    distance += dot_product / norm_product
             case "manhattan":
                 distance += np.sum(np.abs(pre_params - post_params))
             case "minkowski":
@@ -38,5 +42,8 @@ def parameters_distance(pre: dict, post: dict, metric: str = "euclidean", p: flo
                 distance += 1 - correlation
             case _:
                 raise ValueError(f"Metric {metric} is not a valid metric.")
+            
+        # print(f"Name: {name}, current distance: {distance}")
 
+    # print(f"Total distance calculated: {distance}")
     return distance

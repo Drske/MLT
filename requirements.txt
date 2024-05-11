@@ -1,0 +1,6 @@
+torch
+torchvison
+pyyaml
+namegenerator
+matplotlib
+numpy
