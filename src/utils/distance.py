@@ -6,6 +6,7 @@ def parameters_distance(pre: dict, post: dict, metric: str = "euclidean", p: flo
         raise ValueError("Pre & post parameters are different!")
 
     distance = 0.0
+    
     for name, pre_params in pre.items():
         post_params = post[name]
         pre_params, post_params = (

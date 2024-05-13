@@ -72,6 +72,7 @@ class DataCollector(metaclass=SingletonMeta):
                 stats[diff_type][depth] = {}
                 stats[diff_type][depth]['min'] = float(np.min(differences[depth]))
                 stats[diff_type][depth]['mean'] = float(np.mean(differences[depth]))
+                stats[diff_type][depth]['median'] = float(np.median(differences[depth]))
                 stats[diff_type][depth]['max'] = float(np.max(differences[depth]))
         
         with open(os.path.join(directory, 'stats.yaml'), 'w+') as f:

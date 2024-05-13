@@ -167,5 +167,5 @@ data/*
 !data/.gitignore
 
 # experiments directory
-experiments/*
+experiments/**/*.pkl
 !experiments/.gitignore
