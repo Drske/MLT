@@ -81,25 +81,13 @@ The averaged characteristics of changes relative to previous states for all expe
 
 Regarding the average changes relative to the initial state (Figure 10), the observed dependencies are similar in the Appendices section, although some of the trends are more chaotic.
 
-<div class="image-container">
-  <style>
-    .image-container {
-      display: flex;
-      justify-content: center;
-    }
-    .image-column {
-      margin: 0 10px;
-    }
-    .image-column p {
-      margin: 10px 0;
-    }
-  </style>
-  <div class="image-column">
+<div style="display:flex; justify-content:center">
+  <div style="margin: 0 10px">
     <p align="center">
       <img src="./experiments/Minkowski-Even/Gathered init differences.png" alt="Gathered init differences" />
     </p>
     </div>
-  <div class="image-column">
+  <div cstyle="margin: 0 10px">
     <p align="center">
       <img src="./experiments/Minkowski-Even/Gathered next differences.png" alt="Gathered next differences" />
     </p>
