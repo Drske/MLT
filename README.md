@@ -94,13 +94,11 @@ Regarding the average changes relative to the initial state (Figure 10), the obs
       margin: 10px 0; /* Adjust the margin as needed */
     }
   </style>
-
   <div class="image-column">
     <p align="center">
       <img src="./experiments/Minkowski-Even/Gathered init differences.png" alt="Gathered init differences" />
     </p>
     </div>
-
   <div class="image-column">
     <p align="center">
       <img src="./experiments/Minkowski-Even/Gathered next differences.png" alt="Gathered next differences" />
