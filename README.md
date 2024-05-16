@@ -88,10 +88,10 @@ Regarding the average changes relative to the initial state (Figure 10), the obs
       justify-content: center;
     }
     .image-column {
-      margin: 0 10px; /* Adjust the margin as needed */
+      margin: 0 10px;
     }
     .image-column p {
-      margin: 10px 0; /* Adjust the margin as needed */
+      margin: 10px 0;
     }
   </style>
   <div class="image-column">
