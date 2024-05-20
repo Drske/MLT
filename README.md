@@ -69,7 +69,7 @@ The averaged characteristics of changes relative to previous states for all expe
     <img src="./experiments/Minkowski-Even/Gathered next differences.png" alt="Gathered init differences" />
 </p>
 
-Regarding the average changes relative to the initial state, the observed dependencies are similar in the Appendices section, although some trends are more chaotic.
+Regarding the average changes relative to the initial state, the observed dependencies are similar, although some trends are more chaotic.
 
 <p align="center">
     <img src="./experiments/Minkowski-Even/Gathered init differences.png" alt="Gathered next differences" />
